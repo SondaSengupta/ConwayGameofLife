@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(){
-  table.innerHTML = '';
-  var matrix = matrixRandom(4,4);
-  matrix.forEach(creatingTable);
+  setInterval(function(){
+    table.innerHTML = '';
+    var matrix = matrixRandomizer(4,4);
+    matrix.forEach(creatingTable);
+  },1000);
 });
 
 function creatingTable(row){
@@ -24,7 +26,7 @@ function creatingTable(row){
     });
 }
 
-function matrixRandom(numberofRow,numberofColumn){
+function matrixRandomizer(numberofRow,numberofColumn){
   var matrix=[];
   for (var i=0; i < numberofRow; i++) {
     matrix[i]=[];
