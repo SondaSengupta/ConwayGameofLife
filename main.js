@@ -1,9 +1,6 @@
-var matrix = [ [0,1,0], [1,1,0], [1,1,1] ];
-var $td
-
-
 document.addEventListener('DOMContentLoaded', function(){
   table.innerHTML = '';
+  var matrix = matrixRandom(4,4);
   matrix.forEach(creatingTable);
 });
 
@@ -25,11 +22,11 @@ function creatingTable(row){
     });
 }
 
-function matrixRandom(x,y){
+function matrixRandom(numberofRow,numberofColumn){
   var matrix=[];
-  for (var i=0; i < x; i++) {
+  for (var i=0; i < numberofRow; i++) {
     matrix[i]=[];
-    for(var j=0; j < y; j++) {
+    for(var j=0; j < numberofColumn; j++) {
       matrix[i][j]=Math.round(Math.random());
     }
   }
