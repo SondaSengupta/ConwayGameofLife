@@ -14,10 +14,12 @@ function creatingTable(row){
       $td.style.width = "40px";
       $td.style.height = "40px";
         if (cell === 1){
-          $td.style.backgroundColor="black";
+          $td.style.backgroundColor="grey";
+          $td.innerHTML = ":(";
         }
         else {
           $td.style.backgroundColor="green";
+          $td.innerHTML = ":)";
         }
     });
 }
