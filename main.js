@@ -1,6 +1,5 @@
- var matrix = [[0,0,0],[1,1,1],[0,0,0]]
+var matrix = [[0,0,0],[1,1,1],[0,0,0]]
     //var matrix = matrixRandomizer(40,40);
-
 
 document.addEventListener('DOMContentLoaded', function(){
 matrix.forEach(creatingRows);
@@ -19,14 +18,14 @@ $td.textContent = cellValue;
     $tr.appendChild($td);
   });
 }
-  //setInterval(function(){
+
 document.querySelector('#tick').addEventListener('click', function(){
+setInterval(function(){
     table.innerHTML = '';
     matrix = calculateNextState(matrix);
     matrix.forEach(creatingRows);
-
+  },500);
   });
-  //},1000);
 });
 
 
@@ -76,12 +75,25 @@ document.querySelector('#tick').addEventListener('click', function(){
       //currentCell is the value of running the forEach loop with 1 number each
       //y is the position of the cell within an array
       currentRow.forEach(function(currentCell, y){
+        console.log(currentCell);
         var nextCellState = livingNeighborCount(x, y);
+      if (nextCellState === 2) { 
+        currentCell = currentCell;
+      } else if (nextCellState < 2) {
+        currentCell = 0;
+      } else if (nextCellState > 3) {
+        currentCell = 0;
+      } else if (nextCellState === 3) {
+        currentCell = 1;
+      }
+
+
         // Rule 1. Less than 2 neighbors = die of loneliness
         // Rule 2. Things stay the same unless they change (inertia)
         // Rule 3. More than 3 neighbors = death by overpopulation
         // Rule 4. Exactly 3 neighbors = birth
-        nextRow.push(nextCellState);
+        console.log(currentCell);
+        nextRow.push(currentCell);
       });
       nextState.push(nextRow);
     });
