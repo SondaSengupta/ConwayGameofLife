@@ -3,33 +3,27 @@
 
 
 document.addEventListener('DOMContentLoaded', function(){
-
-matrix.forEach(creatingTable);
-function creatingTable(rowValue){
-  var table = document.querySelector('#table');
-  var $tr = document.createElement('tr');
-  table.appendChild($tr);
-  rowValue.forEach(function(cellValue) {
+matrix.forEach(creatingRows);
+  function creatingRows(rowValue){
+    var table = document.querySelector('#table');
+    var $tr = document.createElement('tr');
+    table.appendChild($tr);
+    rowValue.forEach(function(cellValue) {
     var $td = document.createElement('td');
+$td.textContent = cellValue;
+    if (cellValue === 1){
+      $td.classList.add('alive');
+    } else {
+      $td.classList.add('dead');
+    }
     $tr.appendChild($td);
-    $td.style.width = "40px";
-    $td.style.height = "40px";
-    if (cellValue === 0){
-      $td.style.backgroundColor="grey";
-      $td.innerHTML = ":(";
-    }
-    else {
-      $td.style.backgroundColor="green";
-      $td.innerHTML = ":)";
-    }
   });
 }
   //setInterval(function(){
-    document.querySelector('#tick').addEventListener('click', function(){
-    // Tick button has been pressed
+document.querySelector('#tick').addEventListener('click', function(){
     table.innerHTML = '';
     matrix = calculateNextState(matrix);
-    matrix.forEach(creatingTable);
+    matrix.forEach(creatingRows);
 
   });
   //},1000);
@@ -40,11 +34,9 @@ function creatingTable(rowValue){
   function livingNeighborCount(x, y){
     //Counts the value of neighboring cells with a count starting at zero
     var neighborCount = 0;
-    //code will run from the column before to the column after the specified x
+
     for (var i = x - 1; i <= x + 1; i++) {
-      //If x is undefined, it will skip the else statement and go to return neighborCount
-      //This happens if there is no column to left boundary (i < 0 b/c x=0 and x-1=-1 for i)
-      //This happens when there is no column at right boundary (i > #arrays -1 = #indexpositions)
+     //This happens when there is no column at right boundary (i > #arrays -1 = #indexpositions)
       if ( i < 0 || i > matrix.length - 1){
       }
       else {
