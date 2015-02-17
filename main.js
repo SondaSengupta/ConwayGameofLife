@@ -1,32 +1,42 @@
-var matrix = [[0,0,0],[1,1,1],[0,0,0]]
-    //var matrix = matrixRandomizer(40,40);
-
 document.addEventListener('DOMContentLoaded', function(){
-matrix.forEach(creatingRows);
-  function creatingRows(rowValue){
+  var matrix = matrixRandomizer(10,10);
+  creatingRows(matrix);
+  function creatingRows(matrix){
     var table = document.querySelector('#table');
-    var $tr = document.createElement('tr');
-    table.appendChild($tr);
-    rowValue.forEach(function(cellValue) {
-    var $td = document.createElement('td');
-$td.textContent = cellValue;
-    if (cellValue === 1){
-      $td.classList.add('alive');
-    } else {
-      $td.classList.add('dead');
-    }
-    $tr.appendChild($td);
-  });
-}
-
-document.querySelector('#tick').addEventListener('click', function(){
-setInterval(function(){
     table.innerHTML = '';
-    matrix = calculateNextState(matrix);
-    matrix.forEach(creatingRows);
-  },500);
+    matrix.forEach(function(row){
+      var $tr = document.createElement('tr');
+      row.forEach(function(cellValue) {
+        var $td = document.createElement('td');
+        $td.textContent = cellValue;
+        if (cellValue === 1){
+          $td.classList.add('alive');
+        } else {
+          $td.classList.add('dead');
+        }
+        $tr.appendChild($td);      
+      });
+      table.appendChild($tr);
+    });
+  }  
+
+  var runGame; //is an empty variable until tick is clicked
+  document.querySelector('#newGame').addEventListener('click',function(){
+   clearInterval(runGame);
+   var newMatrix = matrixRandomizer(10,10);
+   creatingRows(newMatrix);
   });
-});
+
+  document.querySelector('#tick').addEventListener('click', function(){
+    runGame = setInterval(function(){
+      matrix = calculateNextState(matrix);
+      creatingRows(matrix);
+    },500);  
+  });
+
+  document.querySelector('#pause').addEventListener('click',function(){
+    clearInterval(runGame);  
+  });
 
 
 
@@ -75,7 +85,6 @@ setInterval(function(){
       //currentCell is the value of running the forEach loop with 1 number each
       //y is the position of the cell within an array
       currentRow.forEach(function(currentCell, y){
-        console.log(currentCell);
         var nextCellState = livingNeighborCount(x, y);
       if (nextCellState === 2) { 
         currentCell = currentCell;
@@ -86,30 +95,21 @@ setInterval(function(){
       } else if (nextCellState === 3) {
         currentCell = 1;
       }
-
-
-        // Rule 1. Less than 2 neighbors = die of loneliness
-        // Rule 2. Things stay the same unless they change (inertia)
-        // Rule 3. More than 3 neighbors = death by overpopulation
-        // Rule 4. Exactly 3 neighbors = birth
-        console.log(currentCell);
-        nextRow.push(currentCell);
+      nextRow.push(currentCell);
       });
       nextState.push(nextRow);
     });
     return nextState;
   }
 
-
-/*
-function matrixRandomizer(numberofRow,numberofColumn){
-  var matrix=[];
-  for (var i=0; i < numberofRow; i++) {
-    matrix[i]=[];
-    for(var j=0; j < numberofColumn; j++) {
-      matrix[i][j]=Math.round(Math.random());
+  function matrixRandomizer(numberofRow,numberofColumn){
+    var matrix=[];
+    for (var i=0; i < numberofRow; i++) {
+      matrix[i]=[];
+      for(var j=0; j < numberofColumn; j++) {
+        matrix[i][j]=Math.round(Math.random());
+      }
     }
+    return matrix
   }
-  return matrix
-}
-*/
+});
