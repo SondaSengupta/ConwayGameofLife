@@ -1,12 +1,58 @@
+body{
+	font-family: arial;
+}
+
+h1 {
+	text-align: center;
+}
+
+table {
+	margin: auto auto 100px auto;
+}
 td {
 	padding: 1em;
 	font-size:150%;
 }
 
 td.alive {
-	background-color:green;
+	background-color: #0066CC;
 }
 
 td.dead {
 	background-color:gray;
+}
+
+button {
+	height: 50px;
+	width: 220px;
+	background-color: gray;
+	text-align: center;
+	font-size: 1.5rem;
+	border-radius: 10px;
+	border: solid black 2px;
+	outline: 0;
+	margin: 5px;
+}
+
+.buttons {
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+button:hover {
+	opacity: .7;
+	border: none;
+	border: solid black 3px;
+}
+
+#newGame {
+	background-color: #FFCC00;
+}
+
+#startGame{
+	background-color: #009900;
+}
+
+#pause{
+	background-color: #D65C33;
 }

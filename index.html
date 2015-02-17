@@ -6,9 +6,17 @@
   </head>
   <body>
     <h1> Conway's Game of Life </h1>
-    <button type="submit" id="newGame"> New Game </button>
-    <button type="submit" id="tick"> Start the Game! </button>
-    <button type="submit" id="pause"> Pause </button>
+    <p> This game is a zero-state game in which no further input is required after initially creating the board. There are three rules:
+      <ol>
+        <li>A cell lives if it has 2-3 neighboring cells around it</li>
+        <li>A dead cell regenerates if there are 3 neighboring cells around it.</li>
+         <li>Cells with lower than 2 or higher than 3 living neighbors dies.</li></ol>
+         Based off John Conway's game published in 1970. Living cells are blue and dead cells are grey.</p>
+    <div class="buttons">
+      <button type="submit" id="newGame"> New Game </button>
+      <button type="submit" id="startGame"> Start the Game! </button>
+      <button type="submit" id="pause"> Pause </button>
+    </div>
     <table id="table">
     </table>
   </body>
